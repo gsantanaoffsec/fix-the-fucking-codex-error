@@ -1,0 +1,10 @@
+VERIFICACAO DA ENTREGA - 04/11/2026
+43 testes de nucleo aprovados em Windows PowerShell 5.1.
+43 testes de nucleo aprovados em PowerShell 7.
+6 verificacoes de integracao aprovadas em Windows PowerShell 5.1.
+Sintaxe de todos os scripts verificada.
+Diagnostico real e listagem de extensoes executados sem modificar o VS Code.
+Reparos e restauracoes do pacote testados em fixtures temporarias, nao em maquinas de colegas.
+Revisao independente: corrigidas cinco falhas de classificacao, historico, escopo de perfil, frescor e restauracao.
+Escopo: Windows e VS Code estavel local, perfil padrao. Demais cenarios exigem TI.
+Nao ha garantia de correcao de causas fora das regras documentadas.

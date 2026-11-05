@@ -1,8 +1,10 @@
-﻿CODEX DOCTOR 1.0.0 - DRMAIS
+# CODEX DOCTOR 1.0.0 - DRMAIS
 Diagnóstico e tratamento da inicialização do Codex no VS Code
 Preparado em 04/11/2026
 
-COMEÇAR
+
+## COMEÇAR
+
 1. Extraia o ZIP inteiro para uma pasta local. Não execute de dentro do ZIP.
 2. Dê dois cliques em INICIAR.cmd, com sua conta normal do Windows.
 3. A ferramenta lê a instalação e os logs e informa a ação correspondente.
@@ -15,54 +17,66 @@ Não é necessário instalar Python, Git, Node.js ou bibliotecas PowerShell.
 Não precisa executar como administrador. A janela permanece aberta para
 mostrar o resultado e a pasta do relatório.
 
-ARQUIVOS PARA O USUÁRIO
-INICIAR.cmd              Diagnostica e aplica as correções reconhecidas.
-SOMENTE-DIAGNOSTICO.cmd  Apenas consulta; não fecha nem altera o VS Code.
-RESTAURAR-CACHE.cmd      Restaura o último backup de cache disponível.
-LEIA-ME.txt              Este guia, incluindo a matriz de decisões.
+
+## ARQUIVOS PARA O USUÁRIO
+
+- `INICIAR.cmd`: Diagnostica e aplica as correções reconhecidas.
+- `SOMENTE-DIAGNOSTICO.cmd`: Apenas consulta; não fecha nem altera o VS Code.
+- `RESTAURAR-CACHE.cmd`: Restaura o último backup de cache disponível.
+- `LEIA-ME.txt`: Este guia, incluindo a matriz de decisões.
 
 SE O PROBLEMA FOR X, O TRATAMENTO SERÁ X
 
-* Última tentativa recente iniciou com sucesso:
+### Última tentativa recente iniciou com sucesso
+
   Não altera a instalação. Informa que o último registro estava saudável.
 
-* Service Worker falhou / "Could not find inner client":
+### Service Worker falhou / "Could not find inner client"
+
   Preserva as pastas Service Worker, Code Cache e Cache; deixa o VS Code
   recriá-las e testa a interface. O sinal indica problema de carregamento,
   mas não prova sozinho a origem; o teste verifica o resultado.
 
-* renderer_ready_timeout com Codex 26.1021.22027:
+### renderer_ready_timeout com Codex 26.1021.22027
+
   Instala 26.1007.21434 pelo instalador oficial do VS Code, confere os
   arquivos e o registro e verifica se o VS Code fixou essa versão contra
   atualização automática. Só se aplica enquanto a regra estiver válida.
   Essa combinação funcionou no caso que originou esta ferramenta.
 
-* Timeout em outra versão:
+### Timeout em outra versão
+
   Tenta uma recriação de cache. Se persistir, gera relatório para a TI.
   Não rebaixa qualquer versão do Codex para uma versão antiga.
 
-* Extensão ausente:
+### Extensão ausente
+
   Solicita ao VS Code a instalação de openai.chatgpt pelo Marketplace.
 
-* Arquivos essenciais ausentes ou registro diferente dos arquivos:
+### Arquivos essenciais ausentes ou registro diferente dos arquivos
+
   Reinstala a mesma versão. Uma versão instalada explicitamente é fixada
   pelo VS Code; a TI pode liberar a atualização depois da validação.
 
-* Crash de GPU registrado nos logs analisados:
+### Crash de GPU registrado nos logs analisados
+
   Testa somente aquela abertura com --disable-gpu. Não altera o driver
   nem grava uma mudança gráfica permanente. O relatório informa que o
   sucesso foi observado somente sem GPU; a TI deve avaliar a causa.
 
-* Certificado, proxy, DNS, bloqueio remoto ou falha de autenticação:
+### Certificado, proxy, DNS, bloqueio remoto ou falha de autenticação
+
   Orienta encaminhar à TI ou entrar novamente na conta pelo próprio Codex.
   Não desativa validação TLS, firewall, antivírus ou políticas da empresa.
   Não apaga tokens e não tenta fazer login pelo usuário.
 
-* Host de extensões travado ou processo interno do Codex encerrado:
+### Host de extensões travado ou processo interno do Codex encerrado
+
   Encaminha para investigação. Não desativa Figma, Copilot ou outras
   extensões indiscriminadamente e não instala dependências por suposição.
 
-* Sem logs, registros antigos, histórico incompleto ou causa desconhecida:
+### Sem logs, registros antigos, histórico incompleto ou causa desconhecida
+
   Solicita uma nova tentativa controlada. Se continuar inconclusivo,
   gera relatório sem inventar uma correção ou afirmar que deu certo.
 
@@ -71,7 +85,9 @@ causa explícita tem prioridade. Warnings IPC e avisos de depreciação do
 Node não são tratados como falhas de instalação. O código de saída do
 instalador é verificado, junto com o registro e os arquivos resultantes.
 
-CONFIRMAÇÃO DO RESULTADO
+
+## CONFIRMAÇÃO DO RESULTADO
+
 A ferramenta só confirma um NOVO teste de abertura quando encontra
 "name=app_start outcome=success" em uma nova ativação e com data válida.
 "Initialize received" sozinho não basta. Ausência de erro também não.
@@ -80,7 +96,9 @@ São aplicadas no máximo duas correções por execução, sem ciclos infinitos.
 Se o VS Code pedir confirmação e ninguém clicar em Abrir, o teste pode
 terminar como não confirmado. Isso não significa que a interface abriu.
 
-RELATÓRIOS E BACKUPS
+
+## RELATÓRIOS E BACKUPS
+
 Ficam na conta da pessoa, em:
   %LOCALAPPDATA%\DrMais\CodexDoctor\DATA-HORA-ID\
 
@@ -100,7 +118,9 @@ Backups não são apagados automaticamente.
 Projetos, conversas, settings.json e config.toml não são removidos.
 O reparo de cache não modifica Cookies, Local Storage ou credenciais.
 
-VOLTAR A ATUALIZAR A EXTENSÃO
+
+## VOLTAR A ATUALIZAR A EXTENSÃO
+
 Depois que a TI validar uma versão corrigida: no VS Code, abra Extensões,
 localize Codex e use Atualizar / Instalar outra versão. Reative a atualização
 automática dessa extensão quando aprovado pela TI. A ferramenta não altera
@@ -109,7 +129,9 @@ A troca de versão é registrada no relatório; o backup automático é de cache
 não é uma cópia completa da extensão. Para reinstalar uma versão anterior,
 use a versão registrada e o recurso Instalar outra versão do VS Code.
 
-ESCOPO SUPORTADO
+
+## ESCOPO SUPORTADO
+
 Windows 10/11, Windows PowerShell 5.1+ e VS Code estável instalado localmente
 para o usuário ou em Arquivos de Programas, usando o perfil padrão.
 Não cobre VS Code remoto/SSH, WSL, Insiders, VSCodium ou outras IDEs.
@@ -123,7 +145,9 @@ O lançador usa Bypass somente no processo que executa este script. Se uma
 política corporativa bloquear scripts, solicite implantação/assinatura à TI;
 não desative a política da empresa.
 
-PARA A TI: MANUTENÇÃO DAS REGRAS
+
+## PARA A TI: MANUTENÇÃO DAS REGRAS
+
 regras.json é a lista de versões do caso conhecido, não uma lista de todas
 as falhas possíveis do Codex. A regra inicial vence em 04/12/2026.
 Após essa data, o fallback automático deixa de ser aplicado. O diagnóstico
@@ -148,7 +172,9 @@ relatório. -NoPrompt remove as pausas: se o editor estiver aberto, o reparo
 para em vez de encerrá-lo. -SkipLaunch aplica uma correção indicada sem abrir
 o editor, mas o resultado fica explicitamente NÃO VERIFICADO.
 
-TESTES DO PACOTE
+
+## TESTES DO PACOTE
+
 Na pasta extraída:
   powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\Test-Core.ps1
   powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\Test-Integration.ps1
@@ -157,7 +183,9 @@ VS Code real. Há testes de registro JSON com várias extensões, warnings em
 stderr, versões/data de fallback, logs antigos/múltiplas janelas, ordenação
 de timestamps no PowerShell 5.1, backup/restauração e caminhos adulterados.
 
-REFERÊNCIAS
+
+## REFERÊNCIAS
+
 Configurações oficiais do Codex:
 https://learn.chatgpt.com/docs/ide/settings
 CLI oficial do VS Code:
